@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private bool collided;
-    private float lifetime = 3f;
+    private float lifetime = 5f;
     private void OnCollisionEnter(Collision co)
     {
         if(co.gameObject.tag != "Bullet" && co.gameObject.tag != "Player" && !collided)
