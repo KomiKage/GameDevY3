@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FPSShooter : MonoBehaviour
 {
@@ -12,8 +13,17 @@ public class FPSShooter : MonoBehaviour
     private float TTF;
     public float fireRate = 4;
     public float arcRange = 1;
+    private float spellCost = 0.08f;
 
     private Vector3 destination;
+
+    public Slider manaSlider;
+    private float mana = 1;
+
+    private void Start()
+    {
+        InvokeRepeating("ManaRecharge", 1f, 1f);
+    }
 
     private void Update()
     {
@@ -22,19 +32,26 @@ public class FPSShooter : MonoBehaviour
             TTF = Time.time + 1 / fireRate;
             shootProj();
         }
+
+        manaSlider.value = mana;
+        if (mana > 1) { mana = 1; }
     }
 
     void shootProj()
     {
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
+        if (mana > spellCost)
+        {
+            mana = mana - spellCost;
+            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
-            destination = hit.point;
-        else
-            destination = ray.GetPoint(1000);
+            if (Physics.Raycast(ray, out hit))
+                destination = hit.point;
+            else
+                destination = ray.GetPoint(1000);
 
-        instantiateProj();
+            instantiateProj();
+        }
     }
 
     void instantiateProj()
@@ -42,5 +59,10 @@ public class FPSShooter : MonoBehaviour
         var projObj = Instantiate(proj, firePoint.position, Quaternion.identity) as GameObject;
         projObj.GetComponent<Rigidbody>().velocity = (destination - firePoint.position).normalized * projSpeed;
         iTween.PunchPosition(projObj, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2));
+    }
+
+    void ManaRecharge()
+    {
+        mana = mana + 0.05f;
     }
 }
