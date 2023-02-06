@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,16 +12,30 @@ public class PlayerMovement : MonoBehaviour
     private float jumpHeight = 3f;
     private float sprintMult = 1f;
 
+    public Slider staminaBar;
+    public float stamina = 1f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    public ParticleSystem floatie;
+
     Vector3 velocity;
     bool isGrounded;
+    bool hovering = false;
+
+    public FPSShooter fps;
+
+    private void Start()
+    {
+        InvokeRepeating("StaminaLoss", 0.25f, 0.25f);
+    }
 
     private void Update()
     {
+        if (stamina > 1) { stamina = 1; }
+        staminaBar.value = stamina;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         //isGrounded = controller.isGrounded;
@@ -37,15 +52,18 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * sprintMult * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if(Input.GetButtonDown("Jump") && isGrounded && stamina >= 0.2f)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            stamina = stamina - 0.2f;
         }
 
-        if(Input.GetKey(KeyCode.Space) && !isGrounded && velocity.y < 1f && velocity.y > -1f)
+        if(Input.GetKey(KeyCode.Space) && !isGrounded && velocity.y < 1f && velocity.y > -1f && fps.mana >= 0.03f)
         {
+            hovering = true;
+            floatie.Play();
             velocity.y = -0.7f;
-        }
+        } else { hovering = false; floatie.Pause(); floatie.Clear(); }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -58,5 +76,19 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void StaminaLoss()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            stamina = stamina - 0.03f;
+        }
+        else { stamina = stamina + 0.02f; }
+
+        if(hovering == true)
+        {
+            fps.mana = fps.mana - 0.03f;
+        }
     }
 }

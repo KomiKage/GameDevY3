@@ -18,16 +18,16 @@ public class FPSShooter : MonoBehaviour
     private Vector3 destination;
 
     public Slider manaSlider;
-    private float mana = 1;
+    public float mana = 1;
 
     private void Start()
     {
-        InvokeRepeating("ManaRecharge", 1f, 1f);
+        InvokeRepeating("ManaRecharge", 0.25f, 0.25f);
     }
 
     private void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time >= TTF)
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= TTF)
         {
             TTF = Time.time + 1 / fireRate;
             shootProj();
@@ -39,7 +39,7 @@ public class FPSShooter : MonoBehaviour
 
     void shootProj()
     {
-        if (mana > spellCost)
+        if (mana >= spellCost)
         {
             mana = mana - spellCost;
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -63,6 +63,6 @@ public class FPSShooter : MonoBehaviour
 
     void ManaRecharge()
     {
-        mana = mana + 0.05f;
+        mana = mana + 0.0125f;
     }
 }
