@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class Interactible :MonoBehaviour
+{
+    public enum InteractionType
+    {
+        Click,
+        Hold
+    }
+
+    float holdTime;
+
+    public InteractionType it;
+
+    public abstract string GetDescription();
+    public abstract void Interact();
+
+    public void IncreaseHoldTime() => holdTime += Time.deltaTime;
+    public void ResetHoldTime() => holdTime = 0f;
+    
+    public float GetHoldTime() => holdTime;
+}

@@ -20,6 +20,8 @@ public class FPSShooter : MonoBehaviour
     public Slider manaSlider;
     public float mana = 1;
 
+    public bool wandEnabled = false;
+
     private void Start()
     {
         InvokeRepeating("ManaRecharge", 0.25f, 0.25f);
@@ -39,7 +41,7 @@ public class FPSShooter : MonoBehaviour
 
     void shootProj()
     {
-        if (mana >= spellCost)
+        if (mana >= spellCost && wandEnabled)
         {
             mana = mana - spellCost;
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
