@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
     bool hovering = false;
+    float hoverCost = 0.1f;
 
     public FPSShooter fps;
 
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             stamina = stamina - 0.2f;
         }
 
-        if(Input.GetKey(KeyCode.Space) && !isGrounded && velocity.y < 1f && velocity.y > -1f && fps.mana >= 0.03f)
+        if(Input.GetKey(KeyCode.Space) && !isGrounded && velocity.y < 1f && velocity.y > -1f && fps.mana >= hoverCost)
         {
             hovering = true;
             floatie.Play();
@@ -88,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(hovering == true)
         {
-            fps.mana = fps.mana - 0.03f;
+            fps.mana = fps.mana - hoverCost;
         }
     }
 }

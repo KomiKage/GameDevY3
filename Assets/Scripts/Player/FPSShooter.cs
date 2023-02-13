@@ -7,13 +7,16 @@ public class FPSShooter : MonoBehaviour
 {
     public Camera cam;
     public GameObject proj;
+    public GameObject shield;
     public Transform firePoint;
+    public Transform shieldPoint;
 
     private float projSpeed = 30f;
     private float TTF;
     public float fireRate = 4;
     public float arcRange = 1;
     private float spellCost = 0.08f;
+    private float shieldCost = 0.1f;
 
     private Vector3 destination;
 
@@ -35,6 +38,11 @@ public class FPSShooter : MonoBehaviour
             shootProj();
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            shieldCounter();
+        }
+
         manaSlider.value = mana;
         if (mana > 1) { mana = 1; }
     }
@@ -54,6 +62,11 @@ public class FPSShooter : MonoBehaviour
 
             instantiateProj();
         }
+    }
+
+    void shieldCounter()
+    {
+        var shieldObj = Instantiate(shield, shieldPoint.position, cam.transform.rotation) as GameObject;
     }
 
     void instantiateProj()
