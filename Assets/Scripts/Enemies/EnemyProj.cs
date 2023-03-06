@@ -6,7 +6,7 @@ public class EnemyProj : MonoBehaviour
 {
     private bool collided = false;
     private float lifetime = 5f;
-    //private float projSpeed = 30f;
+    private float projSpeed = 30f;
 
     private void OnCollisionEnter(Collision co)
     {
@@ -15,10 +15,10 @@ public class EnemyProj : MonoBehaviour
             if (co.gameObject.tag == "Shield")
             {
                 Debug.Log("Countered!");
-                //var velo = gameObject.GetComponent<Rigidbody>().velocity;
-                //var opp = -velo;
-                //velo = opp * projSpeed;
-                Destroy(gameObject);
+                var velo = gameObject.GetComponent<Rigidbody>().velocity;
+                var opp = -velo;
+                velo = opp * projSpeed;
+                //Destroy(gameObject);
             }
             else
             {

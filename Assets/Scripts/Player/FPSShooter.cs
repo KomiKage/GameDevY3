@@ -70,7 +70,6 @@ public class FPSShooter : MonoBehaviour
         if (mana >= shieldCost && wandEnabled)
         {
             shieldObj = Instantiate(shield, shieldPoint.position, cam.transform.rotation) as GameObject;
-            StartCoroutine(shieldDestroy());
         }
     }
 
@@ -78,17 +77,11 @@ public class FPSShooter : MonoBehaviour
     {
         var projObj = Instantiate(proj, firePoint.position, Quaternion.identity) as GameObject;
         projObj.GetComponent<Rigidbody>().velocity = (destination - firePoint.position).normalized * projSpeed;
-        iTween.PunchPosition(projObj, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2));
+        //iTween.PunchPosition(projObj, new Vector3(Random.Range(-arcRange, arcRange), Random.Range(-arcRange, arcRange), 0), Random.Range(0.5f, 2));
     }
 
     void ManaRecharge()
     {
         mana = mana + 0.0125f;
-    }
-
-    IEnumerator shieldDestroy()
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(shieldObj);
     }
 }
