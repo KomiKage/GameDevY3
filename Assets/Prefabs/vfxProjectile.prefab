@@ -4825,7 +4825,7 @@ GameObject:
   - component: {fileID: 5784673482780348432}
   - component: {fileID: 6473267681962003823}
   m_Layer: 0
-  m_Name: vfxProjectile
+  m_Name: VfxProjectile
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

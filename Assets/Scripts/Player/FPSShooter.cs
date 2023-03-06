@@ -24,6 +24,7 @@ public class FPSShooter : MonoBehaviour
     public float mana = 1;
 
     public bool wandEnabled = false;
+    private GameObject shieldObj;
 
     private void Start()
     {
@@ -66,7 +67,11 @@ public class FPSShooter : MonoBehaviour
 
     void shieldCounter()
     {
-        var shieldObj = Instantiate(shield, shieldPoint.position, cam.transform.rotation) as GameObject;
+        if (mana >= shieldCost && wandEnabled)
+        {
+            shieldObj = Instantiate(shield, shieldPoint.position, cam.transform.rotation) as GameObject;
+            StartCoroutine(shieldDestroy());
+        }
     }
 
     void instantiateProj()
@@ -79,5 +84,11 @@ public class FPSShooter : MonoBehaviour
     void ManaRecharge()
     {
         mana = mana + 0.0125f;
+    }
+
+    IEnumerator shieldDestroy()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(shieldObj);
     }
 }
