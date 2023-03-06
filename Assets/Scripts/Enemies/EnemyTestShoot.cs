@@ -9,7 +9,7 @@ public class EnemyTestShoot : MonoBehaviour
 
     private float projSpeed = 30f;
     private float TTF;
-    public float fireRate = 4;
+    public float fireRate = 0.5f;
     public float arcRange = 1;
 
     public Transform target;
@@ -51,7 +51,7 @@ public class EnemyTestShoot : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(fireRate);
             instantiateProj();
         }
     }

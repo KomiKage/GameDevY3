@@ -15,10 +15,7 @@ public class EnemyProj : MonoBehaviour
             if (co.gameObject.tag == "Shield")
             {
                 Debug.Log("Countered!");
-                var velo = gameObject.GetComponent<Rigidbody>().velocity;
-                var opp = -velo;
-                velo = opp * projSpeed;
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
             else
             {
