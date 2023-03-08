@@ -21,7 +21,7 @@ public class EnemyProj : MonoBehaviour
             {
                 collided = true;
                 Destroy(gameObject);
-            }
+            }1
         }
 
     }
