@@ -26,6 +26,8 @@ public class FPSShooter : MonoBehaviour
     public bool wandEnabled = false;
     private GameObject shieldObj;
 
+    public AudioSource audio;
+
     private void Start()
     {
         InvokeRepeating("ManaRecharge", 0.25f, 0.25f);
@@ -53,6 +55,7 @@ public class FPSShooter : MonoBehaviour
         if (mana >= spellCost && wandEnabled)
         {
             mana = mana - spellCost;
+            audio.Play();
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
 

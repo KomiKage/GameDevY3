@@ -1290,6 +1290,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 190854240029676923, guid: b5d68634a0bd2354daf5c900835e921b, type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 1044665450}
+    - target: {fileID: 190854240029676923, guid: b5d68634a0bd2354daf5c900835e921b, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1011595443}
@@ -1299,6 +1303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5d68634a0bd2354daf5c900835e921b, type: 3}
+--- !u!82 &1044665450 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4829405671980636945, guid: b5d68634a0bd2354daf5c900835e921b, type: 3}
+  m_PrefabInstance: {fileID: 1019314964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1102324200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2275,7 +2284,7 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807384618}
-  m_Enabled: 1
+  m_Enabled: 0
   m_VideoClip: {fileID: 32900000, guid: 1f4538538bf2eb340a8cdca6eaa6ca3b, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0

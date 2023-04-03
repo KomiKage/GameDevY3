@@ -15,6 +15,8 @@ public class EnemyTestShoot : MonoBehaviour
     public Transform target;
     private float speed = 10f;
 
+    public AudioSource audio;
+
     private void Start()
     {
         StartCoroutine(enemyShoot());
@@ -52,6 +54,8 @@ public class EnemyTestShoot : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(fireRate);
+            audio.Play();
+            yield return new WaitForSeconds(0.3f);
             instantiateProj();
         }
     }
