@@ -6,7 +6,7 @@ public class EnemyProj : MonoBehaviour
 {
     private bool collided = false;
     private float lifetime = 5f;
-    private float projSpeed = 30f;
+    //private float projSpeed = 30f;
 
     private void OnCollisionEnter(Collision co)
     {

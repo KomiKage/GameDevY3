@@ -19,7 +19,7 @@ public class ShieldScript : MonoBehaviour
 
     IEnumerator shieldDestroy()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 

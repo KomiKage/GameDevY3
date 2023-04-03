@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float speed = 12f;
     private float gravity = -9.81f;
-    private float jumpHeight = 3f;
+    private float jumpHeight = 6f;
     private float sprintMult = 1f;
 
     public Slider staminaBar;
@@ -53,10 +53,10 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * sprintMult * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded && stamina >= 0.2f)
+        if(Input.GetButtonDown("Jump") && isGrounded && stamina >= 0.05f)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            stamina = stamina - 0.2f;
+            stamina = stamina - 0.05f;
         }
 
         if(Input.GetKey(KeyCode.Space) && !isGrounded && velocity.y < 1f && velocity.y > -1f && fps.mana >= hoverCost)
@@ -83,9 +83,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            stamina = stamina - 0.03f;
+            stamina = stamina - 0.01f;
         }
-        else { stamina = stamina + 0.02f; }
+        else { stamina = stamina + 0.05f; }
 
         if(hovering == true)
         {

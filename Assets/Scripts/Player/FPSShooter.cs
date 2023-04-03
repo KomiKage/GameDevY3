@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FPSShooter : MonoBehaviour
 {
     public Camera cam;
+    public GameObject player;
     public GameObject proj;
     public GameObject shield;
     public Transform firePoint;
@@ -22,6 +23,8 @@ public class FPSShooter : MonoBehaviour
 
     public Slider manaSlider;
     public float mana = 1;
+    public Slider healthSlider;
+    public float health = 1;
 
     public bool wandEnabled = false;
     private GameObject shieldObj;
@@ -48,6 +51,10 @@ public class FPSShooter : MonoBehaviour
 
         manaSlider.value = mana;
         if (mana > 1) { mana = 1; }
+        healthSlider.value = health;
+        if (health <= 0){
+            death();
+        }
     }
 
     void shootProj()
@@ -75,6 +82,20 @@ public class FPSShooter : MonoBehaviour
             mana -= shieldCost;
             shieldObj = Instantiate(shield, shieldPoint.position, cam.transform.rotation) as GameObject;
         }
+    }
+
+    private void OnCollisionEnter(Collision co)
+    {
+        if (co.gameObject.tag == "Bullet")
+        {
+            health = health - 0.2f;
+        }
+
+    }
+    
+    void death()
+    {
+
     }
 
     void instantiateProj()
