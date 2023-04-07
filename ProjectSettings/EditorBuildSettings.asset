@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestLevel.unity
     guid: c02949cb3b0989e4caf8f028d9736717
+  - enabled: 1
+    path: Assets/Scenes/GameWon.unity
+    guid: fa3e0005c317648469ec55c6929f9192
   m_configObjects: {}

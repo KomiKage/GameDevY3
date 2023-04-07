@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FPSShooter : MonoBehaviour
 {
@@ -95,7 +96,7 @@ public class FPSShooter : MonoBehaviour
     
     void death()
     {
-
+        SceneManager.LoadSceneAsync(2);
     }
 
     void instantiateProj()
